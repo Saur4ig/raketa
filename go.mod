@@ -1,4 +1,4 @@
-module raketa
+module github.com/Saur4ig/raketa
 
 go 1.13
 
