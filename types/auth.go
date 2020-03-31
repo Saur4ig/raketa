@@ -9,7 +9,7 @@ type StatusResponse struct {
 type LogonResponse struct {
 	StatusResponse
 	Data struct {
-		Token  string `json:"token"`
+		Token  string `json:"authToken"`
 		UserID string `json:"userId"`
 	}
 }
