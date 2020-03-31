@@ -9,16 +9,26 @@ import (
 	"github.com/Saur4ig/raketa/types"
 )
 
-func (c *Client) Send(mes Message) error {
+func (c *Client) SendMessage(mes Message) error {
 	payload := types.Payload{
 		Message: types.Message{
-			RoomID:      c.roomID,
-			Alias:       c.userAlias,
-			Message:     mes.MessageText,
-			Emoji:       mes.Emoji,
-			Avatar:      mes.Avatar,
-			Attachments: mes.Attachments,
+			RoomID:  c.roomID,
+			Alias:   c.userAlias,
+			Message: mes.MessageText,
+			Emoji:   mes.Emoji,
+			Avatar:  mes.Avatar,
 		},
+	}
+
+	// add attachments to message
+	if len(mes.Attachments) > 0 {
+		for _, val := range mes.Attachments {
+			payload.Message.Attachments = append(payload.Message.Attachments, types.Attachment{
+				Color: val.Color.String(),
+				Text:  val.Message,
+				Title: val.Title,
+			})
+		}
 	}
 	// if new alias present - set it
 	if mes.IsAliasPresent() {

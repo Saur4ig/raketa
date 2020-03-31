@@ -9,9 +9,15 @@ type Message struct {
 	MessageText string
 	Emoji       string
 	Avatar      string
-	Attachments []types.Attachment
+	Attachments []Attachment
 
 	alias string
+}
+
+type Attachment struct {
+	Message string
+	Color   types.Color
+	Title   string
 }
 
 // sets new alias to message, no whitespaces allowed
