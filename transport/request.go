@@ -1,9 +1,10 @@
 package transport
 
 import (
-	"github.com/pkg/errors"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/pkg/errors"
 )
 
 func SendRequest(client *http.Client, req *http.Request) (ByteResponse, error) {

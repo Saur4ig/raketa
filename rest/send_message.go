@@ -3,20 +3,27 @@ package rest
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/pkg/errors"
 	"net/http"
-	"raketa/transport"
-	"raketa/types"
+
+	"github.com/Saur4ig/raketa/transport"
+	"github.com/Saur4ig/raketa/types"
 )
 
-func (c *Client) Send(payload types.Payload) error {
-	if payload.Message.RoomID == "" {
-		return errors.New("room id is required")
+func (c *Client) Send(mes Message) error {
+	payload := types.Payload{
+		Message: types.Message{
+			RoomID:      c.roomID,
+			Alias:       c.userAlias,
+			Message:     mes.MessageText,
+			Emoji:       mes.Emoji,
+			Avatar:      mes.Avatar,
+			Attachments: mes.Attachments,
+		},
 	}
-	if payload.Message.Alias == "" {
-		return errors.New("alias is required")
+	// if new alias present - set it
+	if mes.IsAliasPresent() {
+		payload.Message.Alias = mes.GetAlias()
 	}
-
 	jsonMessage, err := json.Marshal(payload)
 	if err != nil {
 		return err

@@ -1,6 +1,7 @@
 package rest
 
 import (
+	"errors"
 	"net/http"
 	"time"
 )
@@ -9,6 +10,9 @@ type Client struct {
 	Protocol string
 	Host     string
 	Port     string
+
+	roomID    string
+	userAlias string
 
 	https      bool
 	auth       *authInfo
@@ -20,9 +24,15 @@ type authInfo struct {
 	id    string
 }
 
-func NewClient(host, port string, tls bool, c *http.Client) *Client {
-	var protocol string
+func NewClient(host, port string, tls bool, roomID, alias string, c *http.Client) (*Client, error) {
+	if roomID == "" || roomID == " " {
+		return nil, errors.New("room id is required")
+	}
+	if alias == "" || alias == " " {
+		return nil, errors.New("alias is required")
+	}
 
+	var protocol string
 	if tls {
 		protocol = "https"
 	} else {
@@ -35,5 +45,5 @@ func NewClient(host, port string, tls bool, c *http.Client) *Client {
 		}
 	}
 
-	return &Client{Host: host, Port: port, Protocol: protocol, httpClient: c}
+	return &Client{Host: host, Port: port, Protocol: protocol, httpClient: c, roomID: roomID, userAlias: alias}, nil
 }

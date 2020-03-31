@@ -4,19 +4,26 @@ import (
 	"bytes"
 	"encoding/json"
 	"net/http"
-	"raketa/transport"
-	"raketa/types"
+
+	"github.com/Saur4ig/raketa/transport"
+	"github.com/Saur4ig/raketa/types"
 )
 
-func (c Client) Login(username, pass string) error {
-	creds := map[string]string{"user": username, "password": pass}
+// credentials for login
+type Credentials struct {
+	Login    string
+	Password string
+}
 
-	jsonCreds, err := json.Marshal(creds)
+func (c Client) Login(cr Credentials) error {
+	credentials := map[string]string{"user": cr.Login, "password": cr.Password}
+
+	jsonCredentials, err := json.Marshal(credentials)
 	if err != nil {
 		return err
 	}
 
-	req, err := http.NewRequest("POST", c.GetLoginURL(), bytes.NewBuffer(jsonCreds))
+	req, err := http.NewRequest("POST", c.GetLoginURL(), bytes.NewBuffer(jsonCredentials))
 	if err != nil {
 		return err
 	}

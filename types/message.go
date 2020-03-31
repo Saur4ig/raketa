@@ -5,13 +5,14 @@ import "time"
 type Payload struct {
 	Message Message `json:"message"`
 }
+
 type Message struct {
-	RoomID      string     `json:"rid"`
-	Message     string     `json:"msg"`
-	Alias       string     `json:"alias"`
-	Emoji       string     `json:"emoji"`
-	Avatar      string     `json:"avatar"`
-	Attachments Attachment `json:"attachments"`
+	RoomID      string       `json:"rid"`
+	Message     string       `json:"msg"`
+	Alias       string       `json:"alias"`
+	Emoji       string       `json:"emoji"`
+	Avatar      string       `json:"avatar"`
+	Attachments []Attachment `json:"attachments"`
 }
 
 type Field struct {
@@ -34,19 +35,4 @@ type Attachment struct {
 	TitleLink   string    `json:"title_link"`
 	ImageURL    string    `json:"image_url"`
 	Fields      []Field   `json:"fields"`
-}
-
-func CreateMessage(roomID, alias, message string) *Payload {
-	return &Payload{Message: Message{
-		RoomID:      roomID,
-		Message:     message,
-		Alias:       alias,
-		Emoji:       "",
-		Avatar:      "",
-		Attachments: Attachment{},
-	}}
-}
-
-func (m *Payload) SetAvatar(url string) {
-	m.Message.Avatar = url
 }
