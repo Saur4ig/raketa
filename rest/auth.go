@@ -15,7 +15,7 @@ type Credentials struct {
 	Password string
 }
 
-func (c Client) Login(cr Credentials) error {
+func (c *Client) Login(cr Credentials) error {
 	credentials := map[string]string{"user": cr.Login, "password": cr.Password}
 
 	jsonCredentials, err := json.Marshal(credentials)
