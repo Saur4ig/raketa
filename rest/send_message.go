@@ -35,7 +35,7 @@ func (c *Client) Send(mes Message) error {
 	}
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("X-Auth-Token", c.auth.token)
-	req.Header.Set("X-User_Id", c.auth.id)
+	req.Header.Set("X-User-Id", c.auth.id)
 
 	_, err = transport.SendRequest(c.httpClient, req)
 	if err != nil {
