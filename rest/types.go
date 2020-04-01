@@ -15,9 +15,10 @@ type Message struct {
 }
 
 type Attachment struct {
-	Message string
-	Color   types.Color
-	Title   string
+	Message   string
+	Color     types.Color
+	Title     string
+	TitleLink string
 }
 
 // sets new alias to message, no whitespaces allowed

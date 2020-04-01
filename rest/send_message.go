@@ -25,9 +25,10 @@ func (c *Client) SendMessage(mes Message) error {
 	if len(mes.Attachments) > 0 {
 		for _, val := range mes.Attachments {
 			payload.Message.Attachments = append(payload.Message.Attachments, types.Attachment{
-				Color: val.Color.String(),
-				Text:  val.Message,
-				Title: val.Title,
+				Color:     val.Color.String(),
+				Text:      val.Message,
+				Title:     val.Title,
+				TitleLink: val.TitleLink,
 			})
 		}
 	}
