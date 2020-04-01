@@ -28,6 +28,7 @@ func (c *Client) SendMessage(mes Message) error {
 				Color: val.Color.String(),
 				Text:  val.Message,
 				Title: val.Title,
+				Ts:    nil,
 			})
 		}
 	}
