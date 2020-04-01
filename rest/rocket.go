@@ -14,6 +14,7 @@ type Client struct {
 	roomID    string
 	userAlias string
 
+	debug      bool
 	https      bool
 	auth       *authInfo
 	httpClient *http.Client
@@ -24,7 +25,7 @@ type authInfo struct {
 	id    string
 }
 
-func NewClient(host, port string, tls bool, roomID, alias string, c *http.Client) (*Client, error) {
+func NewClient(host, port string, tls bool, roomID, alias string, c *http.Client, debug bool) (*Client, error) {
 	if roomID == "" || roomID == " " {
 		return nil, errors.New("room id is required")
 	}
@@ -45,5 +46,17 @@ func NewClient(host, port string, tls bool, roomID, alias string, c *http.Client
 		}
 	}
 
-	return &Client{Host: host, Port: port, Protocol: protocol, httpClient: c, roomID: roomID, userAlias: alias}, nil
+	return &Client{
+		Host:       host,
+		Port:       port,
+		Protocol:   protocol,
+		httpClient: c,
+		roomID:     roomID,
+		userAlias:  alias,
+		debug:      debug,
+	}, nil
+}
+
+func (c *Client) IsDebug() bool {
+	return c.debug
 }

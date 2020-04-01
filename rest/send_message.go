@@ -3,6 +3,7 @@ package rest
 import (
 	"bytes"
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/Saur4ig/raketa/transport"
@@ -39,6 +40,9 @@ func (c *Client) SendMessage(mes Message) error {
 		return err
 	}
 
+	if c.IsDebug() {
+		log.Println(string(jsonMessage))
+	}
 	req, err := http.NewRequest("POST", c.GetSendMessageURL(), bytes.NewBuffer(jsonMessage))
 	if err != nil {
 		return err
