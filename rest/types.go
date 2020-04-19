@@ -1,9 +1,5 @@
 package rest
 
-import (
-	"github.com/Saur4ig/raketa/types"
-)
-
 // message for creation
 type Message struct {
 	MessageText string
@@ -16,7 +12,7 @@ type Message struct {
 
 type Attachment struct {
 	Message   string
-	Color     types.Color
+	Color     Color
 	Title     string
 	TitleLink string
 }

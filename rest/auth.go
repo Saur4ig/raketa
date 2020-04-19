@@ -6,8 +6,21 @@ import (
 	"net/http"
 
 	"github.com/Saur4ig/raketa/transport"
-	"github.com/Saur4ig/raketa/types"
 )
+
+// The base for the most of the json responses
+type StatusResponse struct {
+	Status  string `json:"status"`
+	Message string `json:"message"`
+}
+
+type LogonResponse struct {
+	StatusResponse
+	Data struct {
+		Token  string `json:"authToken"`
+		UserID string `json:"userId"`
+	}
+}
 
 // credentials for login
 type Credentials struct {
@@ -15,6 +28,8 @@ type Credentials struct {
 	Password string
 }
 
+// Login a user
+// off docs - https://rocket.chat/docs/developer-guides/rest-api/authentication/login/
 func (c *Client) Login(cr Credentials) error {
 	credentials := map[string]string{"user": cr.Login, "password": cr.Password}
 
@@ -33,7 +48,7 @@ func (c *Client) Login(cr Credentials) error {
 		return err
 	}
 
-	logonR := types.LogonResponse{}
+	logonR := LogonResponse{}
 	err = json.Unmarshal(resp, &logonR)
 	if err != nil {
 		return err

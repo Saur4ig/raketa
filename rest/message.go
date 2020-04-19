@@ -1,10 +1,8 @@
 package rest
 
-import (
-	"github.com/Saur4ig/raketa/types"
-)
-
-func CreateColoredMessage(color types.Color, message, title string) Message {
+// creates message with left side colored pipe
+// off doc https://rocket.chat/docs/developer-guides/rest-api/chat/sendmessage/
+func CreateColoredMessage(color Color, message, title string) Message {
 	return Message{
 		Attachments: []Attachment{{
 			Message: message,

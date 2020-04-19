@@ -10,6 +10,8 @@ import (
 	"github.com/Saur4ig/raketa/types"
 )
 
+// sends message to the room
+// off doc - https://rocket.chat/docs/developer-guides/rest-api/chat/sendmessage/
 func (c *Client) SendMessage(mes Message) error {
 	payload := types.Payload{
 		Message: types.Message{
@@ -36,6 +38,7 @@ func (c *Client) SendMessage(mes Message) error {
 	if mes.IsAliasPresent() {
 		payload.Message.Alias = mes.GetAlias()
 	}
+
 	jsonMessage, err := json.Marshal(payload)
 	if err != nil {
 		return err

@@ -7,9 +7,8 @@ import (
 )
 
 type Client struct {
-	Protocol string
-	Host     string
-	Port     string
+	Host string
+	Port string
 
 	roomID    string
 	userAlias string
@@ -33,13 +32,6 @@ func NewClient(host, port string, tls bool, roomID, alias string, c *http.Client
 		return nil, errors.New("alias is required")
 	}
 
-	var protocol string
-	if tls {
-		protocol = "https"
-	} else {
-		protocol = "http"
-	}
-
 	if c == nil {
 		c = &http.Client{
 			Timeout: 5 * time.Second,
@@ -47,9 +39,9 @@ func NewClient(host, port string, tls bool, roomID, alias string, c *http.Client
 	}
 
 	return &Client{
+		https:      tls,
 		Host:       host,
 		Port:       port,
-		Protocol:   protocol,
 		httpClient: c,
 		roomID:     roomID,
 		userAlias:  alias,

@@ -11,6 +11,10 @@ func (c *Client) getURL() string {
 		sb.WriteString("https://")
 	}
 	sb.WriteString(c.Host)
+	if c.Port != "" {
+		sb.WriteString(":")
+		sb.WriteString(c.Port)
+	}
 	return sb.String()
 }
 

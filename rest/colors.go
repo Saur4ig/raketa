@@ -1,4 +1,4 @@
-package types
+package rest
 
 type Color string
 
