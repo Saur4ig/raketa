@@ -27,7 +27,7 @@ func TestCreateColoredMessage(t *testing.T) {
 				Emoji:  "",
 				Avatar: "",
 				Attachments: []Attachment{{
-					Message: "my test title",
+					Message: "my test message",
 					Color:   Red,
 					Title:   "title 11",
 				}},
