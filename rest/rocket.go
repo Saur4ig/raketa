@@ -6,11 +6,14 @@ import (
 	"time"
 )
 
+// rest client for base needs
 type Client struct {
 	Host string
 	Port string
 
-	roomID    string
+	// id of room or channel
+	roomID string
+	// username could be changed for specific message, if user is bot
 	userAlias string
 
 	debug      bool
@@ -24,6 +27,7 @@ type authInfo struct {
 	id    string
 }
 
+// creates new rest raketa client
 func NewClient(host, port string, tls bool, roomID, alias string, c *http.Client, debug bool) (*Client, error) {
 	if roomID == "" || roomID == " " {
 		return nil, errors.New("room id is required")
@@ -49,6 +53,7 @@ func NewClient(host, port string, tls bool, roomID, alias string, c *http.Client
 	}, nil
 }
 
+// checks is client in debug mod
 func (c *Client) IsDebug() bool {
 	return c.debug
 }

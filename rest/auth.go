@@ -14,6 +14,7 @@ type StatusResponse struct {
 	Message string `json:"message"`
 }
 
+// response for login request
 type LogonResponse struct {
 	StatusResponse
 	Data struct {

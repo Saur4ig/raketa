@@ -13,6 +13,7 @@ const (
 	Black  Color = "#000000"
 )
 
+// get color as a string
 func (c Color) String() string {
 	return string(c)
 }

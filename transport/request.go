@@ -9,6 +9,7 @@ import (
 	"github.com/pkg/errors"
 )
 
+// just sends request
 func SendRequest(client *http.Client, req *http.Request) (ByteResponse, error) {
 	resp, err := client.Do(req)
 	if err != nil {
@@ -19,7 +20,7 @@ func SendRequest(client *http.Client, req *http.Request) (ByteResponse, error) {
 	if resp.StatusCode != http.StatusOK {
 		debugger, _ := httputil.DumpResponse(resp, true)
 		log.Println(string(debugger))
-		return nil, errors.Errorf("request failed, status %d", resp.StatusCode)
+		return nil, errors.Errorf("request failed, status code %d", resp.StatusCode)
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
