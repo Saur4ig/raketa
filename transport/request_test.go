@@ -30,12 +30,14 @@ func TestSendRequest(t *testing.T) {
 	}
 
 	client := &http.Client{}
-	res, err := SendRequest(client, req)
-	if err != nil {
-		t.Error(err)
-		return
-	}
-	if string(res) != "test 1" {
-		t.Errorf("SendRequest() = %v, want %v", string(res), "test 1")
-	}
+	t.Run("test 1", func(t *testing.T) {
+		res, err := SendRequest(client, req)
+		if err != nil {
+			t.Error(err)
+			return
+		}
+		if string(res) != "test 1" {
+			t.Errorf("SendRequest() = %v, want %v", string(res), "test 1")
+		}
+	})
 }
